@@ -1,9 +1,17 @@
 import React, {useState} from 'react';
 import logo from 'assets/logo.svg'
 import restaurant from 'assets/fake-restaurant.png'
-import {SideBar, Logo, Search, Container, Map, CarouselTitle, Card, Carousel, CardTitle} from "./styles";
+import {
+  SideBar,
+  Logo,
+  Search,
+  Container,
+  CarouselTitle,
+  Carousel,
+} from "./styles";
 import TextField, {Input} from "@material/react-text-field"
 import MaterialIcon from "@material/react-material-icon";
+import {Map, RestaurantCard, RestaurantCarouselImage} from "components";
 
 const carouselSettings = {
   dots: false,
@@ -34,25 +42,37 @@ function Home(props) {
           </TextField>
           <CarouselTitle>Near you</CarouselTitle>
           <Carousel {...carouselSettings}>
-            <Card image={restaurant}>
-              <CardTitle>Restaurant's name</CardTitle>
-            </Card>
-            <Card image={restaurant}>
-              <CardTitle>Restaurant's name</CardTitle>
-            </Card>
-            <Card image={restaurant}>
-              <CardTitle>Restaurant's name</CardTitle>
-            </Card>
-            <Card image={restaurant}>
-              <CardTitle>Restaurant's name</CardTitle>
-            </Card>
-            <Card image={restaurant}>
-              <CardTitle>Restaurant's name</CardTitle>
-            </Card>
-            <Card image={restaurant}>
-              <CardTitle>Restaurant's name</CardTitle>
-            </Card>
+            <RestaurantCarouselImage
+              name="Restaurant's name"
+              image={restaurant}
+            />
+            <RestaurantCarouselImage
+              name="Restaurant's name"
+              image={restaurant}
+            />
+            <RestaurantCarouselImage
+              name="Restaurant's name"
+              image={restaurant}
+            />
+            <RestaurantCarouselImage
+              name="Restaurant's name"
+              image={restaurant}
+            />
+            <RestaurantCarouselImage
+              name="Restaurant's name"
+              image={restaurant}
+            />
+            <RestaurantCarouselImage
+              name="Restaurant's name"
+              image={restaurant}
+            />
           </Carousel>
+          <RestaurantCard
+            name="Restaurant's name"
+            stars={4}
+            address="Restaurants address"
+            image={restaurant}
+          />
         </Search>
       </SideBar>
       <Map/>
