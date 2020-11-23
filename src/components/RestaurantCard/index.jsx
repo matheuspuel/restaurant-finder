@@ -8,15 +8,17 @@ import {
 } from "./styles";
 import ReactStars from "react-rating-stars-component";
 
-function RestaurantCard({name, stars, address, image}) {
+function RestaurantCard({restaurant}) {
+  const {name, rating, vicinity, address, photos} = restaurant
+
   return (
     <Restaurant>
       <RestaurantInfo>
         <RestaurantTitle>{name}</RestaurantTitle>
-        <ReactStars count={5} value={stars} isHalf edit={false} activeColor='#e7711c'/>
-        <RestaurantAddress>{address}</RestaurantAddress>
+        <ReactStars count={5} value={rating} isHalf edit={false} activeColor='#e7711c'/>
+        <RestaurantAddress>{vicinity || address}</RestaurantAddress>
       </RestaurantInfo>
-      <RestaurantImage src={image} alt={"Restaurant's photo"}/>
+      <RestaurantImage src={photos && photos[0].getUrl()} alt={"Restaurant's photo"}/>
     </Restaurant>
   );
 }
