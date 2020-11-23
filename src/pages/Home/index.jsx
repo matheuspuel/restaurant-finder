@@ -24,6 +24,13 @@ const carouselSettings = {
 
 function Home(props) {
   const [searchString, setSearchString] = useState('')
+  const [query, setQuery] = useState(null)
+
+  function handleKeyPress({key}) {
+    if (key === 'Enter') {
+      setQuery(searchString)
+    }
+  }
 
   return (
     <Container>
@@ -38,6 +45,7 @@ function Home(props) {
             <Input
               value={searchString}
               onChange={e => setSearchString(e.currentTarget.value)}
+              onKeyPress={handleKeyPress}
             />
           </TextField>
           <CarouselTitle>Near you</CarouselTitle>
@@ -75,7 +83,7 @@ function Home(props) {
           />
         </Search>
       </SideBar>
-      <Map/>
+      <Map query={query}/>
     </Container>
   );
 }
