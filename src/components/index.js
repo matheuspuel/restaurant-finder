@@ -1,3 +1,5 @@
 export {default as Map} from './Map'
 export {default as RestaurantCard} from './RestaurantCard'
 export {default as RestaurantCarouselImage} from './RestaurantCarouselImage'
+export {default as SearchField} from './SearchField'
+export {default as Modal} from './Modal'

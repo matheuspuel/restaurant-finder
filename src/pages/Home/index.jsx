@@ -7,10 +7,10 @@ import {
   Search,
   Container,
   CarouselTitle,
-  Carousel,
+  Carousel, ModalTitle, ModalContent,
 } from "./styles";
-import {Map, RestaurantCard, RestaurantCarouselImage} from "components";
-import SearchField from "../../components/SearchField";
+import {Map, Modal, RestaurantCard, RestaurantCarouselImage} from "components";
+import {SearchField} from "components";
 
 const carouselSettings = {
   dots: false,
@@ -24,7 +24,14 @@ const carouselSettings = {
 
 function Home(props) {
   const [query, setQuery] = useState(null)
-  const {restaurants} = useSelector(store => store.restaurants)
+  const [placeId, setPlaceId] = useState(null)
+  const [modalOpen, setModalOpen] = useState(false);
+  const {restaurants, selectedRestaurant} = useSelector(store => store.restaurants)
+
+  function handlePlaceSelect(placeId) {
+    setPlaceId(placeId)
+    setModalOpen(true)
+  }
 
   return (
     <Container>
@@ -42,12 +49,23 @@ function Home(props) {
               />
             ))}
           </Carousel>
-          {restaurants.map(restaurant => (
-            <RestaurantCard key={restaurant.place_id} restaurant={restaurant}/>
-          ))}
         </Search>
+        {restaurants.map(restaurant => (
+          <RestaurantCard
+            key={restaurant.place_id}
+            restaurant={restaurant}
+            onClick={() => handlePlaceSelect(restaurant.place_id)}/>
+        ))}
       </SideBar>
-      <Map query={query}/>
+      <Map query={query} placeId={placeId}/>
+      <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+        <ModalTitle>{selectedRestaurant?.name}</ModalTitle>
+        <ModalContent>{selectedRestaurant?.formatted_phone_number}</ModalContent>
+        <ModalContent>{selectedRestaurant?.formatted_address}</ModalContent>
+        <ModalContent>
+          {selectedRestaurant?.opening_hours?.open_now ? 'Open now!' : 'Closed now :('}
+        </ModalContent>
+      </Modal>
     </Container>
   );
 }

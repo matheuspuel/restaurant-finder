@@ -24,8 +24,7 @@ function SearchField({setQuery}) {
         onKeyPress={handleKeyPress}
       />
     </TextField>
-  )
-    ;
+  );
 }
 
 export default SearchField;

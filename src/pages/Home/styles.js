@@ -40,3 +40,19 @@ export const Carousel = styled(Slider)`
   }
 `
 
+export const ModalContent = styled.p`
+  margin-bottom: 10px;
+  letter-spacing: 0.11px;
+  font-family: ${({theme})=>theme.fonts.regular};
+  color: ${({theme})=>theme.colors.text};
+  font-weight: normal;
+  line-height: 19px;
+  font-size: 16px;
+`
+
+export const ModalTitle = styled(ModalContent)`
+  font-weight: bold;
+  line-height: 29px;
+  font-size: 24px;
+`
+
