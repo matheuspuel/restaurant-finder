@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {Card, Title} from "./styles";
 import Skeleton from "../Skeleton";
-import noImage from 'assets/no-image-available.png'
+import noImage from 'assets/no-image-available-gray.jpg'
 
 function RestaurantCarouselImage({name, image}) {
   const [imageLoaded, setImageLoaded] = useState(false);
