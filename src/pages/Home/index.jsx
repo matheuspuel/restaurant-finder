@@ -9,7 +9,7 @@ import {
   CarouselTitle,
   Carousel, ModalTitle, ModalContent,
 } from "./styles";
-import {Map, Modal, RestaurantCard, RestaurantCarouselImage} from "components";
+import {Loader, Map, Modal, RestaurantCard, RestaurantCarouselImage, Skeleton} from "components";
 import {SearchField} from "components";
 
 const carouselSettings = {
@@ -39,16 +39,20 @@ function Home(props) {
         <Search>
           <Logo src={logo} alt="Restaurant's Logo"/>
           <SearchField setQuery={setQuery}/>
-          <CarouselTitle>Near you</CarouselTitle>
-          <Carousel {...carouselSettings}>
-            {restaurants.map(({place_id, name, photos}) => (
-              <RestaurantCarouselImage
-                key={place_id}
-                name={name}
-                image={photos && photos[0].getUrl()}
-              />
-            ))}
-          </Carousel>
+          {restaurants.length === 0 ? <Loader/> : (
+            <>
+              <CarouselTitle>Near you</CarouselTitle>
+              <Carousel {...carouselSettings}>
+                {restaurants.map(({place_id, name, photos}) => (
+                  <RestaurantCarouselImage
+                    key={place_id}
+                    name={name}
+                    image={photos && photos[0].getUrl()}
+                  />
+                ))}
+              </Carousel>
+            </>
+          )}
         </Search>
         {restaurants.map(restaurant => (
           <RestaurantCard
@@ -59,12 +63,23 @@ function Home(props) {
       </SideBar>
       <Map query={query} placeId={placeId}/>
       <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
-        <ModalTitle>{selectedRestaurant?.name}</ModalTitle>
-        <ModalContent>{selectedRestaurant?.formatted_phone_number}</ModalContent>
-        <ModalContent>{selectedRestaurant?.formatted_address}</ModalContent>
-        <ModalContent>
-          {selectedRestaurant?.opening_hours?.open_now ? 'Open now!' : 'Closed now :('}
-        </ModalContent>
+        {!selectedRestaurant ?
+          <>
+            <Skeleton width='10px' height='30px'/>
+            <Skeleton width='10px' height='10px'/>
+            <Skeleton width='10px' height='10px'/>
+            <Skeleton width='10px' height='10px'/>
+          </>
+          :
+          <>
+            <ModalTitle>{selectedRestaurant?.name}</ModalTitle>
+            <ModalContent>{selectedRestaurant?.formatted_phone_number}</ModalContent>
+            <ModalContent>{selectedRestaurant?.formatted_address}</ModalContent>
+            <ModalContent>
+              {selectedRestaurant?.opening_hours?.open_now ? 'Open now!' : 'Closed now :('}
+            </ModalContent>
+          </>
+        }
       </Modal>
     </Container>
   );

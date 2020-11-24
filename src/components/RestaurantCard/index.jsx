@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   Restaurant,
   RestaurantAddress,
@@ -7,9 +7,11 @@ import {
   RestaurantTitle
 } from "./styles";
 import ReactStars from "react-rating-stars-component";
+import Skeleton from "../Skeleton";
 
 function RestaurantCard({restaurant, onClick}) {
   const {name, rating, vicinity, address, photos} = restaurant
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
     <Restaurant onClick={onClick}>
@@ -18,7 +20,13 @@ function RestaurantCard({restaurant, onClick}) {
         <ReactStars count={5} value={rating} isHalf edit={false} activeColor='#e7711c'/>
         <RestaurantAddress>{vicinity || address}</RestaurantAddress>
       </RestaurantInfo>
-      <RestaurantImage src={photos && photos[0].getUrl()} alt={"Restaurant's photo"}/>
+      <RestaurantImage
+        imageLoaded={imageLoaded}
+        src={photos && photos[0].getUrl()}
+        alt={"Restaurant's photo"}
+        onLoad={() => setImageLoaded(true)}
+      />
+      {imageLoaded || <Skeleton width='100px' height='100px'/>}
     </Restaurant>
   );
 }

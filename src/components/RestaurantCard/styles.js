@@ -20,8 +20,8 @@ export const RestaurantInfo = styled.div`
 `
 
 export const RestaurantTitle = styled.span`
-  font-family: ${({theme})=>theme.fonts.regular};
-  color: ${({theme})=>theme.colors.text};
+  font-family: ${({theme}) => theme.fonts.regular};
+  color: ${({theme}) => theme.colors.text};
   font-size: 24px;
   font-weight: bold;
   line-height: 29px;
@@ -29,7 +29,7 @@ export const RestaurantTitle = styled.span`
 `
 export const RestaurantAddress = styled.span`
   font-family: ${({theme}) => theme.fonts.regular};
-  color: ${({theme})=>theme.colors.text};
+  color: ${({theme}) => theme.colors.text};
   font-size: 16px;
   line-height: 19px;
   margin-bottom: 10px;
@@ -37,6 +37,7 @@ export const RestaurantAddress = styled.span`
 `
 
 export const RestaurantImage = styled.img`
+  display: ${({imageLoaded}) => imageLoaded ? 'block' : 'none'};
   width: 100px;
   height: 100px;
   border-radius: 6px;

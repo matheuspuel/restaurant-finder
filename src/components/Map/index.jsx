@@ -21,6 +21,7 @@ function MapContainer({google, query, placeId}) {
   }, [placeId])
 
   function searchNearby(map) {
+    dispatch(setRestaurants([]))
     const service = new google.maps.places.PlacesService(map)
     const request = {
       location: map.center,
@@ -36,6 +37,7 @@ function MapContainer({google, query, placeId}) {
   }
 
   function searchByQuery(query) {
+    dispatch(setRestaurants([]))
     const service = new google.maps.places.PlacesService(map)
     const request = {
       location: map.center,
@@ -52,6 +54,7 @@ function MapContainer({google, query, placeId}) {
   }
 
   function getRestaurantById(placeId) {
+    dispatch(setSelectedRestaurant(null))
     const service = new google.maps.places.PlacesService(map)
     const request = {
       placeId,
