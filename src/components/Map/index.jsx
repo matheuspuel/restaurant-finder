@@ -76,6 +76,8 @@ function MapContainer({google, query, placeId}) {
       centerAroundCurrentLocation
       onReady={onMapReady}
       onRecenter={onMapReady}
+      // style={{height: '100%', width: '100%'}}
+      containerStyle={{height: '100%', width: 'calc(100vw - 360px)'}}
     >
       {restaurants.map(({place_id, name, geometry}) => (
         <Marker
