@@ -36,9 +36,9 @@ export const CarouselTitle = styled.h1`
 `
 
 export const Carousel = styled(Slider)`
-  .slick-slide{
-    margin-right: 12px;
-  }
+  //.slick-slide{
+  //  margin: 12px;
+  //}
 `
 
 export const ModalContent = styled.p`
